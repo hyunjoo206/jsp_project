@@ -1,0 +1,40 @@
+package domain;
+
+public class CommentVO {
+
+	/*create table comment(
+cno int not null auto_increment,
+bno int default 0,
+writer varchar(100) default “unknown”,
+content varchar(1000) not null,
+reg_date datetime default now(), 
+primary key(cno)
+);
+*/
+private int cno; //auto_increament
+private int bno;
+private String writer;
+private String content;
+private String reg_date;
+
+public CommentVO() {}
+
+//등록할 때 필요 - bno, writer, content 
+public CommentVO(int bno, String writer, String content) {
+this.bno = bno;
+this.writer = writer;
+this.content=content;
+}
+
+//삭제할 때 필요 - cno, writer, content
+// 위에랑 int, String, String 순서라서 바꿔서 해줘야함
+// writer, content, int 순서로
+public CommentVO(String writer, String content, int cno) {
+	this.writer=writer;
+	this.content=content;
+	this.cno=cno;
+}
+	
+}
+	
+

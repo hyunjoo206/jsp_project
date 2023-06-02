@@ -1,0 +1,23 @@
+--DB--
+create user 'jspuser2'@'localhost' identified by 'mysql';
+
+--0526--
+create table member(
+id varchar(100) not null,
+password varchar(100) not null,
+email varchar(100) not null,
+age int,
+reg_date datetime default now(),
+last_login datetime,
+primary key(id));
+
+--0530--
+create table board(
+bno int not null auto_increment,
+title varchar(100) not null,
+writer varchar(100) not null,
+content text,
+reg_date datetime default now(),
+readCount int default 0,
+primary key(bno));
+

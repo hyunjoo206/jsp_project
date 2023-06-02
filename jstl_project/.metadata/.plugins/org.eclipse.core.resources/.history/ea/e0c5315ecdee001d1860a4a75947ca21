@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="model.PersonVO" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	이름 : ${param.name } <br>
+	나이 : ${param.age}세<br>
+	<br><br>
+	
+	<!-- EL 방식으로 name, age를 출력 -->
+	<%
+		PersonVO pvo = new PersonVO("홍길동",18);
+	//객체생성 후 
+		request.setAttribute("pvo", pvo);
+	//request로 setAttribute로 이름지정, 객체이름
+	%>
+	
+	
+	<c:choose>
+		<c:when test="${pvo.age >= 20}">
+		성인입니다. <br>		
+		</c:when>
+			
+		<c:when test="${pvo.age >= 15}">
+		청소년입니다. <br>		
+		</c:when>
+		
+		<c:when test="${pvo.age >= 5}">
+		어린이입니다. <br>		
+		</c:when>
+		
+		<c:when test="${pvo.age >= 1}">
+		유아입니다. <br>		
+		</c:when>
+					
+		<c:otherwise>
+		아직 태어나지 않았습니다. <br>		
+		</c:otherwise>
+	</c:choose>
+	
+</body>
+</html>

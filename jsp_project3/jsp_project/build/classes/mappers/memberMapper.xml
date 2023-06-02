@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="MemberMapper">
+ 	<!-- register -->
+  	<insert id="reg" parameterType="mvo">
+  		insert into member(id, password, email, phone, age)
+  		values(#{id},#{password},#{email},#{phone},#{age})
+  	</insert>
+  	
+ 	<!-- login -->
+  	<select id="log" parameterType="mvo" resultType="mvo">
+  		select * from member where 
+		 id=#{id} and password=#{password} 		
+  	</select>
+  	
+ 	<!-- logout 주는 것만 있고 받아오는 값이 없는 이유
+ 		last_login 값을 받아올 필요가 없는 이유는
+ 		당장 controller에서 last_login값을 갖고 보여줄 게 아니니까..?
+ 	 -->
+  	<update id="logout" parameterType="String">
+  		update member set last_login= now()
+  		where id =#{id}
+  	</update>
+  	
+  	<!-- edit -->
+  	<update id="edit" parameterType="mvo">
+  		update member set password=#{password},
+  		email=#{email}, phone=#{phone}, age=#{age}
+  		where id=#{id}
+  	</update>
+  	
+  	<!-- delete -->
+  	<delete id="del" parameterType="String">
+  		delete from member where id=#{id}
+  	</delete>
+  	
+  	<!-- list -->
+  	<!-- 리턴타입이 객체야..? 왜..? -->
+  	<select id="showlist" resultType="mvo">
+  		select id, email, phone, age from member
+  	</select>
+  	
+  </mapper>

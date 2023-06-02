@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제품 상세 페이지</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td>번호 : </td>
+			<td><input type="text" name="pno" value="${pvo.pno}"></td>		
+		</tr>
+		<tr>
+			<td>제목 : </td>
+			<td><input type="text" name="pname" value="${pvo.pname}"></td>		
+		</tr>
+		<tr>
+			<td>가격 : </td>
+			<td><input type="text" name="pname" value="${pvo.price}"></td>		
+		</tr>
+		
+		
+	</table>
+</body>
+</html>

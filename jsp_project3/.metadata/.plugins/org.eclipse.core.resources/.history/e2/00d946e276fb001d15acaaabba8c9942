@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="BoardMapper">
+  
+  	<insert id="reg" parameterType="bvo">
+  		insert into board(title, writer, content)
+  		values(#{title},#{writer},#{content})
+  	</insert>
+  
+  	  	 <!-- list아니라 bvo 타입으로 보내는거임! -->
+  	<select id="list" resultType="bvo"> 
+  		select * from board order by bno desc
+  	</select>
+  	
+  	<select id="sel" parameterType="int" resultType="bvo">
+  		select * from board where bno= #{bno}
+  	</select>
+  	
+  	 <update id="up" parameterType="bvo" >
+  		update board set 
+  		title=#{title}, content=#{content}, reg_date=now() where bno=#{bno}
+  	</update>
+  	
+  	<delete id="del" parameterType="int">
+  		<!-- delete는 * 없음! 주의! -->
+  		delete from board where bno=#{bno}
+  	</delete>
+  	
+  	<select id="cnt" resultType ="int" >
+  		select count(bno) from board where bno>0
+  	</select>
+  	
+  	<!-- limit은 SQL에서 결과 집합의 일부만 선택하여 반환하는 기능을 수행 
+  			LIMIT offset, count (offset은 0부터 시작, count는 반환할 행의 수)
+  	-->										
+  	<select id="pageList" parameterType="pgvo" resultType="bvo">
+  	 	select * from board order by bno desc limit #{pageStart}, #{qty}
+  	</select>
+  
+  	
+  	<sql id="search"> <!-- search라는 id를 지정하여 sql코드 참조 가능 -->
+  		<if test="type!=null">	<!-- 검색조건 type이 null이 아닐때 즉, 선택되었을 때 -->	
+	  		<!-- trim으로 동적으로 where절 생성 / prefix는 조건 시작 시 추가할 문자열 / prefixOverrides은 OR을 제거-->
+  			<trim prefix="and (" suffix=")" prefixOverrides="OR"> 
+  				<!-- typeToArray 배열 순회하며 type에 배열 각 요소넣음 -->
+  				<foreach collection="typeToArray" item="type"> 
+  					<trim prefix="OR"> <!-- 조건 생성 전 OR 추가 -->
+  						<choose>
+  							<!-- when 태그 안에 검색 조건이 t일 때 sql 조건 생성 
+  								type 변수 값이 t와 동일한지 문자열로 변환 후 비교
+  							-->
+							<when test="type == 't'.toString()">
+								<!-- %을 문자열 앞뒤로 추가하여 검색어 포함된 모든 값을 검색 -->
+  								title like concat('%', #{keyword}, '%')
+  							</when>
+  							<when test="type == 'w'.toString()">
+  								writer like concat('%', #{keyword}, '%')
+  							</when>
+  							<when test="type == 'c'.toString()">
+  								content like concat('%', #{keyword}, '%')
+  							</when> 						
+  						</choose>
+  					</trim>
+  				</foreach>
+  			</trim>
+  		</if>
+  	</sql>
+  	
+  	<!-- 결국 type 값이 tw인 경우 위 코드에 따라서 sql 구문은
+  	(title LIKE CONCAT('%', #{keyword}, '%')) OR (writer LIKE CONCAT('%', #{keyword}, '%'))
+  	위와 같이 작성됨 -->
+  	
+  
+  </mapper>

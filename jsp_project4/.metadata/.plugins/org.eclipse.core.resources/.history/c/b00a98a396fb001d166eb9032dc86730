@@ -1,0 +1,11 @@
+package repository;
+
+public class MemberDAOImpl implements MemberDAO {
+	private static final Logger log = LoggerFactory.getLogger(MemberDAOImpl.class);
+	private SqlSession sql;
+	
+	public MemberDAOImpl() {
+		new DatabaseBuilder();
+		sql = DatabaseBuilder.getFactory().openSession();
+	}
+}

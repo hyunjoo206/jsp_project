@@ -1,0 +1,23 @@
+package service;
+
+import domain.BoardVO;
+
+public class BoardServiceImpl implements BoardService {
+
+	//선언해주기
+	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
+	private BoardDAO bdao;
+	
+	// 연결해주기
+	public BoardServiceImpl() {
+		bdao = new BoardDAOImpl();
+	}
+	
+	
+	@Override
+	public int register(BoardVO bvo) {
+		
+		return 0;
+	}
+
+}

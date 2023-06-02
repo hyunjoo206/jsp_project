@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제품 수정 페이지</title>
+</head>
+<body>
+	  
+        <table>
+            <tr>
+                <td>번호:</td>
+                <td><input type="text" name="pno" value="${pvo.pno}"></td>
+            </tr>
+            <tr>
+                <td>제목:</td>
+                <td><input type="text" name="pname" value="${pvo.pname}"></td>
+            </tr>
+            <tr>
+                <td>가격:</td>
+                <td><input type="text" name="price" value="${pvo.price}"></td>
+            </tr>
+            <tr>
+                <td>등록일자:</td>
+                <td><input type="text" name="regDate" value="${pvo.regdate}"></td>
+            </tr>
+            <tr>
+                <td>세부내용:</td>
+                <td><input type="text" name="details" value="${pvo.details}"></td>
+            </tr>
+        </table>
+        <br>
+        <button type="submit">완료</button>
+  
+</body>
+</html>

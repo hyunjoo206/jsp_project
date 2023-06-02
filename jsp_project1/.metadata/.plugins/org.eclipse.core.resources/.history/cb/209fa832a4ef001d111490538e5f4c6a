@@ -1,0 +1,46 @@
+package repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import domain.ProductVO;
+import orm.DatabaseConnector;
+
+public class ProductDAO implements DAO {
+	//DB Connector 
+	private Connection conn;
+	//DB 연결 후 sql 전송 객체
+	private PreparedStatement pst;
+	//query문 작성 변수
+	private String query="";
+	
+	public ProductDAO() {
+		DatabaseConnector dbc = DatabaseConnector.getInstance(); // new로 생성불가. 싱글톤 객체생성 방식
+		conn = dbc.getConnection();
+		
+	}
+	
+	@Override
+	public int insert(ProductVO pvo) {
+		System.out.println(">>> DAO 진입성공");
+		//쿼리문을 query에 넣기 - ?이용해서 매개변수 처리
+		query="insert into product(pname, price, madeby) values(?,?,?)";
+		try {
+			//여기선 펼쳐서 가져오기 되지만, mybatis에서는 무조건 한 객체로만 가능함. 
+			pst = conn.prepareStatement(query);
+			pst.setString(1, pvo.getPname());
+			pst.setInt(2, pvo.getPrice());
+			pst.setString(3, pvo.getMadeby());	
+			//executeUpdate : insert, update, delete 
+			//executeQuery : select에서 사용
+			return pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return 0;
+	}
+	
+	
+} 

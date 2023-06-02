@@ -1,0 +1,16 @@
+package domain;
+
+public class PagingVO {
+	
+	private int pageNum; //현재 화면에 출력되는 페이지네이션 번호
+	private int qty; //한 페이지에 보여줄 게시물 수
+	
+	public PagingVO() { //페이지네이션을 클릭하기 전 기본 값으로 지정
+		this(1,10);
+	}
+	
+	public PagingVO(int pageNum, qty) {
+		this.pageNum = pageNum;
+		this.qty=qty;
+	}
+}

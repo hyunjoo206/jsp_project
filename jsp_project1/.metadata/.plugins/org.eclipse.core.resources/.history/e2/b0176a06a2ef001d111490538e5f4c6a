@@ -1,0 +1,25 @@
+package orm;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DatabaseConnector {
+	//싱글톤 방식
+	private static DatabaseConnector dbc = new DatabaseConnector();
+	//url, user, password
+	private Connection conn = null; //db관련 접속 규격
+	//jdbcDriver
+	private String jdbcDriver = "com.mysql.jdbc.Driver";
+	//mysql URL
+	private String jdbcUrl = "jdbc:mysql://localhost/javadb";
+	
+	private DatabaseConnector(){
+		try {
+			Class.forName(jdbcDriver);
+			conn = DriverManager.getConnection(jdbcUrl, "javauser", "mysql");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+}

@@ -1,0 +1,20 @@
+package domain;
+
+public class ProductVO {
+
+	/*create table product(
+	pno int not null auto_increment,
+	pname varchar(50) not null,
+	price int not null,
+	regdate datetime default now(),
+	madeby varchar(50),
+	primary key(pno)
+	);*/
+	
+	private int pno;
+	private String pname;
+	private int price;
+	private String regdate;
+	private String madeby;
+	
+}

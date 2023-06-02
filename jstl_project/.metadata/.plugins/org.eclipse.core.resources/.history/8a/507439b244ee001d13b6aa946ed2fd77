@@ -1,0 +1,21 @@
+<%@ page import="model.PersonVO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSTL choose 연습</title>
+</head>
+<body>
+	<!-- model 안에 PersonVO class 생성 멤버변수는 name, age 만 추가
+	생성자, getter&setter만 추가-->
+	
+	<!-- EL 방식으로 name, age를 출력 -->
+	${paramValues.PersonVO.name} <br>
+	${paramValues.PersonVO.age} <br>
+	
+	
+</body>
+</html>

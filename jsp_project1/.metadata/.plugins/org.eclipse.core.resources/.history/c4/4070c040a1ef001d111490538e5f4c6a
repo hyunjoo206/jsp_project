@@ -1,0 +1,7 @@
+package orm;
+
+public class DatabaseConnector {
+	//싱글톤 방식
+	private static DatabaseConnector dbc = new DatabaseConnector();
+	private Connection conn = null;
+}

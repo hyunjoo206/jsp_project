@@ -1,0 +1,18 @@
+package service;
+
+import domain.CommentVO;
+
+public class CommentServiceImpl implements CommentService {
+	private static Logger log = LoggerFactory.getLogger(CommentServiceImpl.class);
+	private CommentDAO cdao;
+	public CommentServiceImpl() {
+		cdao = new CommentDAOImpl();
+	}
+
+	@Override
+	public int post(CommentVO cvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

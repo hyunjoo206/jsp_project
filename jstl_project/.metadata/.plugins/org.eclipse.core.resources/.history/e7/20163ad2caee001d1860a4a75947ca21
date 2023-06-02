@@ -1,0 +1,37 @@
+<%@ page import="model.PersonVO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSTL choose 연습</title>
+</head>
+<body>
+	<!-- model 안에 PersonVO class 생성 멤버변수는 name, age 만 추가
+	생성자, getter&setter만 추가-->
+	
+	<!-- EL 방식으로 name, age를 출력 -->
+	<%
+		PersonVO pvo = new PersonVO("홍길동",18);
+	//객체생성 후 
+		request.setAttribute("pvo", pvo);
+	//request로 setAttribute로 이름지정, 객체이름
+	%>
+	
+	<!-- requestScope.지정한이름.거기서name -->
+	${requestScope.pvo.name} <br>
+	${requestScope.pvo.age} <br>
+	
+	<!-- 나이가 20살 이상이면 성인입니다 -->
+	<c:if test = "${pvo.age>=20}">
+		성인입니다.	
+	</c:if>
+	
+	<!--  다중조건을 사용할 경우 choose, when, otherwise -->
+	
+	
+	
+</body>
+</html>

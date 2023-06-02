@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>회원정보 수정</h1><br>
+	
+	<form action="/mem/edit" method="post">		
+		아이디 : <input type="text"  name="id" value="${ses.id}" readonly="readonly"><br>
+		비밀번호 : <input type="text" name="password" value="${ses.password}"><br>
+		email: <input type="text" name="email" value="${ses.email}"><br>
+		나이 : <input type="text" name="age" value="${ses.age}"><br><br>
+		<!-- hidden으로 숨겨서 가져감 -->
+		<input type="hidden" name="reg_date" value="${ses.reg_date}"><br>
+		<input type="hidden" name="last_login" value="${ses.last_login}"><br>
+		
+		<button type="submit">modify</button>
+		<button type="submit">회원탈퇴</button>		
+	</form>
+	
+</body>
+</html>

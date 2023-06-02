@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EL param 연습 3</title>
+</head>
+<body>
+<!-- 스클립틀릿 방식에서는 넘어오는 parameter값이 문자열로 인식 
+	age+1의 값을 전달하면 201 나이 뒤에 1이 추가되는 형태로 전송
+-->
+
+	1. 스클립틀릿 방식으로 파라미터를 전달받음 <br>
+	<%=request.getParameter("nick") %> <br>
+	<%=request.getParameter("age")+1 %>세<br>
+	<br><br>
+	<hr>
+	
+	2. EL 방식으로 파라미터를 전달받음 <br>
+	${param.nick } <br>
+	${param.age+1 }세<br>
+	
+</body>
+</html>

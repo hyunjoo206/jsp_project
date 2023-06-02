@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EL param 연습 3</title>
+</head>
+<body>
+	1. 스클립틀릿 방식으로 파라미터를 전달받음 <br>
+	<%=request.getParameter("nick") %> <br>
+	<%=request.getParameter("age") %> <br>
+	<br><br>
+	<hr>
+	
+	2. EL 방식으로 파라미터를 전달받음 <br>
+	${param.nick } <br>
+	${param.age } <br>
+	
+</body>
+</html>

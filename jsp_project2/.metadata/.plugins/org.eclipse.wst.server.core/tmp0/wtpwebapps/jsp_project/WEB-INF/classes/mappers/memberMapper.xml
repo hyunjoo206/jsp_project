@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="MemberMapper"> 
+  <!-- memberMapper가 db(cmd창)이랑 같은 거다..... -->
+  	<insert id="reg" parameterType="mvo">
+  		insert into member (id, password, email, age)
+  		values(#{id},#{password}, #{email}, #{age})
+  	</insert>
+  	<select id="login" parameterType="mvo" resultType="mvo">
+  		select * from member where 
+  		id = #{id} and password = #{password}
+  	</select>
+  	<update id="logout" parameterType="String">
+  		update member set last_login = now() where id= #{id}	
+  	</update>
+  	<update id="mod" parameterType="mvo">
+  		<!-- sql에서 수정하는 구문을 어떻게 작성해야할지 모르것음.. -->
+  		update member set password =#{password}, email=#{email}, age=#{age}
+  		where id = #{id}
+  	</update>
+  	<!-- 자료형처럼 String 굳이 안 해도 상관없음 -->
+  	<delete id ="del" parameterType="string">
+  		delete from member where id=#{id}
+  	</delete>
+  	<!-- 전달해줄 건 없으니 parameterType은 없어도 되고, resultType으로! -->
+  	<select id="list" resultType="mvo">
+  		select id, email, age from member
+  	</select>
+  </mapper>

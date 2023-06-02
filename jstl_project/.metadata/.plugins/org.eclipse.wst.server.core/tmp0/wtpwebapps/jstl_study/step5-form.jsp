@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="step5-action.jsp">
+	<!-- action : 서버 위치로 이동하게 하는 기능 -->
+		이름 : <input type="text" name="name"><br>
+		나이 : <input type="text" name="age"><br>
+		<button type="submit">전송</button>
+	</form>
+	
+</body>
+</html>

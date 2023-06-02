@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;domain.memberVO.java&apos; to &apos;MemberVO.java&apos;&#x0D;&#x0A;- Original project: &apos;jsp_project&apos;&#x0D;&#x0A;- Original element: &apos;domain.memberVO.java&apos;&#x0D;&#x0A;- Renamed element: &apos;domain.MemberVO.java&apos;" description="Rename compilation unit &apos;memberVO.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src\/main\/java&lt;domain{memberVO.java" name="MemberVO.java" references="false" stamp="1683861253187" version="1.0"/>
+</session>

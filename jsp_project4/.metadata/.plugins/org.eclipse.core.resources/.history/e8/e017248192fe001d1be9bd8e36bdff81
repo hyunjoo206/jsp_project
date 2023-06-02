@@ -1,0 +1,164 @@
+package controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import domain.BoardVO;
+import service.BoardService;
+import service.BoardServiceImpl;
+
+@WebServlet("/brd/*")
+public class BoardController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
+    private RequestDispatcher rdp; // 웹의 목적지 주소로 객체를 전달해주는 객체 
+	private String destPage; //목적지 주소를 저장해주는 변수
+	private int isOk; //db의 결과를 받는 변수
+    private BoardService bsv; // 서비스 인터페이스
+    //파일 경로를 저장할 변수
+    private String savePath;
+    private final String UTF8 ="utf-8"; //인코딩 설정시
+	
+    public BoardController() {
+    	bsv = new BoardServiceImpl();
+    }
+
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		String uri = request.getRequestURI();
+		log.info(">>>uri > "+uri);
+		String path = uri.substring(uri.lastIndexOf("/")+1);
+		log.info(">>>path > "+path);
+		
+		switch(path) {
+		case "register" : 
+			destPage = "/board/register.jsp";
+			break;
+
+		case "insert":
+			try {
+				//웹앱 안에 파일 업로드 값을 저장하겠다 => 파일이 저장될 경로가 할당
+				//getServletContext()는 서블릿에서 제공되는 메서드, 컨텍스트 객체 반환, 정보에 접근 가능
+				//서블릿컨텍스트는 저장소 역할을 함
+				//_fileUpload는 파일 저장할 디렉토리(폴더) 이름
+				// 결국 폴더의 실제 파일 시스템 경로를 savePath
+				savePath = getServletContext().getRealPath("_fileUpload");
+				log.info(">>>파일경로 "+savePath);
+				
+				//fileDir 변수에는 실제 파일이 저장될 폴더인 File 객체가 생성됨
+				File fileDir = new File(savePath);
+				
+				//DiskFileItemFactory: 결국 파일 업로드 처리
+				//아파치 commons 라이브러리에서 제공하는 클래스로 파일 업로드 처리에 필요한 객체 생성하는 역할
+				DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+				fileItemFactory.setRepository(fileDir); //파일의 저장 위치를 담고 있는 객체인 fileDir을 저장
+				fileItemFactory.setSizeThreshold(2*1024*1024); //파일을 저장하기 위한 임시 메모리 용량 설정 : byte 단위
+				
+				//객체 생성
+				BoardVO bvo = new BoardVO();
+				//image 넣어야 하므로 set으로 가져올 예정
+				//ServletFileUpload: multipart/form-data 형식으로 넘어온 request 객체를 다루기 쉽게 변환해주는 역할
+				//request 객체 안에 있는 값(분리되어있는)을 다시 싹 조립해줌
+				ServletFileUpload fileUpload = new ServletFileUpload(fileItemFactory);
+				//fileupload가 변환해서 list화해서 itemList에 저장 
+				
+				//fileUpload.parseRequest(request)를 통해 FileItem 객체 리스트인 itemList를 가져옴
+				//itemList에 title, writer, contents가 key:value 로 들어가있음
+				//request 객체에서 FileItem을 파싱해서 itemList에 저장함
+				List<FileItem> itemList = fileUpload.parseRequest(request);
+				for(FileItem item : itemList) { //itemList에 있는 FileItem에 대해 반복
+					switch(item.getFieldName()) { //필드이름 가져와서 => key의 값을 가져오는 작업 수행
+					case "title" :
+						bvo.setTitle(item.getString(UTF8)); 
+						// getName하면 안됨 .. 지금 갈아져있음 ,, 그래서 utf8형식으로 가져와달라 해야함
+						//그냥 빼면 깨지기 때문에 인코딩 형식 담아서 변환
+						break;					
+				
+					case "writer":
+						bvo.setWriter(item.getString(UTF8));
+						break;
+						
+					case "content":
+						bvo.setContent(item.getString(UTF8));
+						break;
+						
+					case "image_file":
+						//이미지가 있는지 없는지 체크부터 
+						if(item.getSize() > 0) { //데이터의 크기를 확인해서 업로드 됐는지 확인
+							//경로를 포함한 파일이름 ex) ~~~/dog.jpg
+							//파일 이름 가져와서 /부터 마지막 파일이름 추출
+							String fileName = item.getName().substring(item.getName().lastIndexOf("/")+1);
+							//파일이름이 중복되는 경우 구분히 확실X => 유일성을 주기 위해 파일명 앞에 시간 적음
+							fileName = System.currentTimeMillis()+"_"+fileName;
+							
+							log.info(">>>파일이름 : "+fileName);
+							//파일 저장될 경로 포함 File 객체인 uploadFilePath를 생성
+							File uploadFilePath = new File(fileDir + File.separator+fileName);
+							log.info(">>>실제 파일경로 :" + uploadFilePath);
+							
+							//저장
+							try {
+								item.write(uploadFilePath); // uploadFilePath(실제경로)에 자바 객체(파일)를 디스크에 쓰기(파일을 저장한다는 의미)
+								bvo.setImage_file(fileName); //bvo의 image)file 속성에 파일 이름 설정해줌
+								
+								//썸네일 작업 : 리스트 페이지에서 트래픽 과다사용 방지
+								//th_는 접두어 붙여서 파일로 저장됨
+								Thumbnails.of(uploadFilePath).size(75,75)
+								.toFile(new File(fileDir+File.separator+"th_"+fileName));
+								
+							} catch (Exception e) {
+								log.info(">>> file writer on disk fail");
+								e.printStackTrace();
+							
+							}
+						}
+						break;
+					}
+				}
+				
+				isOk = bsv.register(bvo);
+				log.info(">>>register > "+(isOk>0?"success":"fail"));
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+			destPage = "page";
+			break;
+			
+			
+		}//switch 끝	
+		
+		rdp=request.getRequestDispatcher(destPage);
+		rdp.forward(request, response);
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		service(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		service(request, response);
+	}
+
+}

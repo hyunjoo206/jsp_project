@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- mapper 오류나면 db다 끊김 그러니까 이거 필수! DAO에서 NS랑 맞춰서 BoardMapper로 -->
+  
+  <mapper namespace="CommentMapper">
+  	<insert id="reg" parameterType="cvo">
+  		insert into comment(bno, writer, content) 
+  		values(#{bno}, #{writer}, #{content})
+  	</insert>
+  	
+  	<select id="list" parameterType="int" resultType="cvo"> 
+  						<!-- bno라고 적지말기 int!! -->
+  		select * from comment where bno=#{bno}
+  	</select>
+  	
+  	<delete id="del" parameterType="int">
+  		delete from comment where cno=#{cno}
+  	</delete>
+  	
+  	<update id="edit" parameterType="cvo">
+  		update comment set
+  		cno=#{cno}, writer=#{writer}, content=#{content} where bno=#{bno}
+  	</update>
+  	
+  </mapper>

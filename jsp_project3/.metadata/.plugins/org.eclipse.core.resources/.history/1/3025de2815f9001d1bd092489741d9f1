@@ -1,0 +1,17 @@
+package repository;
+
+import domain.CommentVO;
+
+public class CommentDAOImpl implements CommentDAO {
+	private static Logger log = LoggerFactory.getLogger(CommentServiceImpl.class);
+	private SqlSession sql;
+	private final String NS = "CommentMapper.";
+	private int isOk;
+	
+	@Override
+	public int insert(CommentVO cvo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

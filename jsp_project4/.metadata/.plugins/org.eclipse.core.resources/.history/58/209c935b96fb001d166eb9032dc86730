@@ -1,0 +1,18 @@
+package service;
+
+import domain.MemberVO;
+
+public class MemberServiceImpl implements MemberService {
+
+	private static final Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
+	private MemberDAO mdao;
+	
+	@Override
+	public int register(MemberVO mvo) {
+		
+		
+		
+		return 0;
+	}
+
+}

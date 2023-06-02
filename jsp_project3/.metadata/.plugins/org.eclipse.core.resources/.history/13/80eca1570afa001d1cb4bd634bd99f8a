@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <!-- taglibrary 달아주기 -->
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>List Page</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>bno</th>
+				<th>title</th>
+				<th>writer</th>
+				<th>content</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- list4로 받아온거 확인하기 -->
+			<c:forEach items="${list4}" var="bvo">
+				<tr>
+					<!-- input에만 hidden 기능이 있음, bno가 필요하지만 화면에 보일 필요는 없으므로 -->
+					<!-- 현재페이지에서 넘어갈 다음 페이지의 주소(uri)를 적어주기 -->
+					<td><a href="/brd/detail?bno=${bvo.bno}">${bvo.bno}</a></td>					
+					<td><a href="/brd/detail?bno=${bvo.bno}">${bvo.title}</a></td>					
+					<td>${bvo.writer}</td>
+					<td>${bvo.content}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<br>
+	<a href="/"><button>index로</button></a>
+	
+</body>
+</html>

@@ -1,0 +1,12 @@
+package model;
+
+public class PersonVO {
+	private String name;
+	private int age;
+	
+	//생성자
+	public PersonVO(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
+}

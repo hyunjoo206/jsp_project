@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.logging.Logger"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactoryBuilder"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.io.Resources"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="service.MemberService"/>
+    <fullyQualifiedTypeName name="domain.MemberVO"/>
+    <fullyQualifiedTypeName name="service.MemberServiceImpl"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory"/>
+    <fullyQualifiedTypeName name="domain.BoardVO"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload"/>
+    <fullyQualifiedTypeName name="org.apache.tomcat.util.http.fileupload.FileItem"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="org.json.simple.parser.JSONParser"/>
+    <fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
+    <fullyQualifiedTypeName name="domain.CommentVO"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.json.simple.JSONArray"/>
+    <fullyQualifiedTypeName name="service.CommentServiceImpl"/>
+    <fullyQualifiedTypeName name="domain.PagingVO"/>
+    <fullyQualifiedTypeName name="handler.PagingHandler"/>
+    <fullyQualifiedTypeName name="handler.FileHandler"/>
+    <fullyQualifiedTypeName name="org.slf4j.Logger"/>
+    <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+    <fullyQualifiedTypeName name="orm.DatabaseBuilder"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="net.coobird.thumbnailator.Thumbnails"/>
+</qualifiedTypeNameHistroy>

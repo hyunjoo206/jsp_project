@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="model.PersonVO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+		// PersonVO 객체를 이용하여 list에 여러명을 추가(5명)
+		// list를 request 객체에 담아 jsp로 전송
+		
+		ArrayList<PersonVO> list = new ArrayList<PersonVO>();
+		
+		
+	
+	%>
+	<!-- 테이블을 생성하여 표로 출력 -->
+</body>
+</html>

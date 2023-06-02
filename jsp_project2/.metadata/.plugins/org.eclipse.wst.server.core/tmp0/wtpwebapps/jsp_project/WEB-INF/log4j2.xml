@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+	<Appenders>
+		<Console name = "Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d - %msg%n"></PatternLayout>
+			<!-- %d : 해당 로그가 발생한 시간
+				%msg : 로그문에 전달된 메시지
+				%n : 줄바꿈 -->
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="DEBUG">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>	
+</Configuration>

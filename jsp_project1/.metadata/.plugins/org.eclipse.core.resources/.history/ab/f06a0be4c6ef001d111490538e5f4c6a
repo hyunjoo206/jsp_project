@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Product Delete Page</h1> 
+	<br>
+	<form action="delete.pd" method="post">
+		pno : <input type="text" name="pno"><br>
+		
+		<button type="submit">delete</button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,60 @@
+async function postCommentToServer(cmtData){
+	try{
+		//이 정보를 다 가지고 controller로 가는거
+		const url = "/cmt/post";
+		const config = {
+			method:'post', //post 방식이고
+			header:{ //타입이 json, utf-8이고
+				'Content-Type' : 'application/json; charset=utf-8'
+			},
+			body:
+			//json을 문자열로 바꿔주는 내장함수
+			//cmtData가 json의 형태인데 stringify를 사용해서 string형태로 바꿔줌
+			JSON.stringify(cmtData)
+		};
+	
+		const resp = await fetch(url, config);
+		const result = await resp.text();
+		return result;
+		
+	}catch(error){
+		console.log(error);
+	}
+}
+
+//댓글등록버튼 (deatil.jsp에 있음)을 누르면 이벤트 발생
+document.getElementById("cmtAddbtn").addEventListener('click',()=>{
+	//코멘트에 입력한 value값을 cmtText라고 detail.jsp에서 정해줌
+	const cmtText = document.getElementById('cmtText').value;
+	console.log(cmtText);
+	//댓글창이 비어있으면 등록 안함
+	if(cmtText == null || cmtText ==""){
+		//입력창이 비어있으면 alert 띄우기
+		alert('댓글을 입력해주세요');
+		return false;
+	}else{
+		//여기서 cmtData가 나오는거임~~ 위에 postCommentToServer에서 쓸거임
+		let cmtData = {
+			//JSON 형태 : key, value 값으로 받음
+			//detail.jsp 에서 가져온 값임 
+			bno : bnoVal,
+			writer : document.getElementById('cmtWriter').value,
+			content : cmtText
+		};
+		postCommentToServer(cmtData).then(result=>{
+			if(result>0){//프로미스 객체 형태에 0,1이 들어있는 상태임 그래서 0보다크면
+				alert('댓글 등록 성공!!');
+				//댓글등록 성공 후 댓글창 비워주려고 "" 넣어줌
+				document.getElementById('cmtText').value="";		
+			}
+		})
+	}
+})
+
+//댓글 가져오기기능 - bno에 해당하는 댓글 리스트 달라고 요청하는 기능
+async function getCommentListFromServer(bno){
+	
+	
+	
+}
+
